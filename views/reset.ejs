@@ -1,0 +1,17 @@
+<% include ./partials/header.ejs %>
+
+   <div class="container mt-4">
+    <h4>Enter your password</h4>
+    <form mt-3 action="/reset/<%= user.id %>" method="post">
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label">Enter new password</label>
+          <input type="password" name="password" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+          <label for="exampleInputEmail1" class="form-label">confirm password</label>
+          <input type="password" name="confirmpassword" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+        </div>
+        
+        <button type="submit" class="btn btn-success">Reset my password</button>
+      </form>
+   </div>
+
+<% include ./partials/footer.ejs %>

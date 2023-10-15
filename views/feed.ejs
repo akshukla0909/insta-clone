@@ -1,0 +1,20 @@
+<% include ./partials/header.ejs %>
+
+<div class="container mt-4">
+  <h1 class="mb-4">Feed</h1>
+    <h4>All post around indrapuri</h4>
+    <% posts.forEach(function(elem){  %>
+      <div class="card mb-3">
+        <div class="card-body">
+            <h5 class="card-title"> @<%= elem.userid.username %></h5>
+            <p class="card-text"><%= elem.post %>.</p>
+            <p class="card-text text-primary" style="font-weight: 600;"><%= elem.likes.length %>Likes</p>
+            <a href="/like/<%= elem.id %>" class="btn btn-primary ">Like</a>
+            <a href="/delete/<%= elem._id %>" class="btn btn-primary">Delete</a>
+            <a href="/profile" class="btn btn-primary">Create a new Post</a>
+        </div>
+    </div>
+   <% })  %>
+</div>
+
+<% include ./partials/footer.ejs %>

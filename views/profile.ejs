@@ -1,0 +1,110 @@
+<% include ./partials/header.ejs %>
+  <style>
+    .circ-img{
+        width: 200px;
+        height: 200px;
+        position: relative;
+        cursor: pointer;
+        border-radius: 50%;
+    }
+    .rounded-circle{
+      height: 200px;
+      width: 200px;
+      border: 2px pink solid;
+      object-fit: cover;
+      object-position: center;
+    }
+    .pencil{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 12;
+      position: absolute;
+      right: 20px;
+      top: 10px;
+      width: 30px;
+      height: 30px;
+      background-color: rgb(241, 239, 239);
+      border-radius: 50%;
+      opacity: 0;
+    }
+    #image-form{
+      display: none;
+    }
+    .circ-img:hover .pencil{
+       opacity: 1;
+    }
+    .prof{
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+    }
+  </style>
+
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-md-4">
+      <form action="/upload" method="post" id="form-s" enctype="multipart/form-data">
+        <input type="file" name="image" id="image-form">
+      </form>
+      <div class="circ-img">
+        <div class="pencil"><i class="ri-pencil-line"></i></div>
+      <img src="../images/uploads/<%= user.photo %>" alt="Profile Picture" class="rounded-circle mx-auto">
+      </div>
+      <div class="prof">
+        <div class="abt">
+          <h3 class="mt-3"><%= user.username %></h3>
+          <p>Age: 21</p>
+        </div>
+        <a href="/edit"><h4 class="mb-3" style="color: black;">edit profile</h4></a>
+      </div>
+
+    </div>
+    <div class="col-md-8">
+      <h2>Posts</h2>
+      <div class="card">
+        <form action="/post" method="post">
+          <div class="form-group">
+            <!-- <label for="postContent">Write your post:</label> -->
+            <textarea name="post" class="form-control" id="postContent" rows="4" style="resize: none;"></textarea>
+          </div>
+          <form action="/feed" method="get">
+            <button type="submit" class="btn btn-primary">Create Post</button>
+          </form>
+        </form>
+        </div>
+      </div>
+     
+      <!-- Add more posts here -->
+    </div>
+    <div class="container mt-4">
+      <h1 class="mb-4">Feed</h1>
+        <h4>All post by you</h4>
+        <% user.posts.reverse().forEach(function(elem){  %>
+          <div class="card mb-3">
+            <div class="card-body">
+                <h5 class="card-title"> @<%= user.username %></h5>
+                <p class="card-text"><%= elem.post %>.</p>
+                <p class="card-text text-primary" style="font-weight: 600;"><%= elem.likes.length %>Likes</p>
+                <a href="/like/<%= elem.id %>" class="btn <%= elem.likes.indexOf(user.id) === -1 ? 'btn-primary' : 'btn-danger' %>"><%= elem.likes.indexOf(user.id) === -1 ? 'Like' : 'Dislike' %></a>
+                <a href="/delete/<%= elem._id %>" class="btn btn-primary">Delete</a>
+                <a href="/profile" class="btn btn-primary">Create a new Post</a>
+            </div>
+        </div>
+       <% })  %>
+    </div>
+  </div>
+</div>
+
+  <script>
+    document.querySelector(".ri-pencil-line")
+   .addEventListener("click", function(){
+     document.querySelector("#image-form").click();
+
+   })
+
+   document.querySelector("#image-form")
+   .addEventListener("change", function(){
+    document.querySelector("#form-s").submit();
+   })
+  </script>
