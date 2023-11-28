@@ -166,40 +166,6 @@ router.get('/like/:postkiid', isLoggedIn, function(req,res, next){
   })
 })
 
-// router.get('/like/:postid', isLoggedIn, function(req, res, next) {
-//   userModel.findOne({ username: req.session.passport.user })
-//     .then(function(founduser) {
-//       postModel.findOne({ _id: req.params.postid })
-//         .then(function(post) {
-//           // if (!post) {
-//           //   // Post not found
-//           //   return res.status(404).send("Post not found");
-//           // }
-
-//           // if (!Array.isArray(post.likes)) {
-//           //   post.likes = []; // Initialize likes as an array if not already
-//           // }
-
-//           post.likes.push(founduser._id);
-//           post.save()
-//             .then(function() {
-//               res.redirect('back');
-//             })
-//             .catch(function(error) {
-//               // console.error("Error saving post:", error);
-//               // res.status(500).send("Error saving post");
-//             });
-//         })
-//         .catch(function(error) {
-//           // console.error("Error finding post:", error);
-//           // res.status(500).send("Error finding post");
-//         });
-//     })
-//     .catch(function(error) {
-//       // console.error("Error finding user:", error);
-//       // res.status(500).send("Error finding user");
-//     });
-// });
 
 router.get('/delete/:_id', isLoggedIn, function(req,res,next){
   const id = req.params.id;
