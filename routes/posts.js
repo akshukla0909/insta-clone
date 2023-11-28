@@ -12,5 +12,6 @@ var postSchema = mongoose.Schema({
   time : { type: Date,default : Date.now() }
 })
 
-module.exports =  mongoose.model('post', postSchema)
+module.exports =  mongoose.model('post'
+, postSchema)
 
